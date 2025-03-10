@@ -1,0 +1,32 @@
+nomes[] //podem ser iguais
+enderecos[] //podem ser iguais
+telefones[] //nao podem ser iguais
+i=0
+enquanto i for menor que 10
+	pede para o usuario o nome
+	adiciona nome ao nomes
+	pede para o usuario o endereço
+	adiciona endereco ao enderecos
+	pede para o usuario o telefone
+	adicione telefone aos telefones
+	i++
+	
+pesquisarUser
+	usuarioEncontrado = false
+	Qual nome do usuario que deseja pesquisa?
+	grava nome
+	percorre i de nomes
+	se nomes[i] = nome
+	usuarioEncontado = true
+	enderecoUser = enderecos[i]
+	telefoneUser = telefones[i]
+	mostre o usuario .. mora em end.. e o telefone é tel..
+se usuarioEncontrado = false
+	mostre usuario nao encontrado
+mostrarRegistros
+i=0
+enquanto i<10
+	mostre nomes[i] telefone[i] endereco[i]
+i++
+
+
