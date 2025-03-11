@@ -1,0 +1,31 @@
+nomes = []
+medias = []
+soma = 0
+i=1
+pede para o usuario o nome 
+adiciona nome aos nomes
+pede para o usuario a quantidade de notas
+grava quantidade como inteiro
+enquanto i<=qtdeNotas
+   pede para o usuario a i nota
+   grava notas como double
+	enquanto nota > 10 ou nota <0
+	mostre nota invalida
+	pede para o usuario a i nota
+  	grava notas como double
+   soma += notas
+media = soma / qtdeNotas
+adiciona media a medias
+repita 20
+
+pesquisarAluno
+pede para o usuario o nome
+percorre i de nomes.indices
+	se nomes[i] = nome
+	aprovacao = media[i] > 5 ? "aprovado": "reprovado"
+	mostre nome media[i] o aluno foi aprovacao
+
+pesquisarAlunos
+percorre i de nomes
+aprovacao = media[i] > 5 ? "aprovado": "reprovado"
+mostre nomes[i] medias[i] aprovacao
