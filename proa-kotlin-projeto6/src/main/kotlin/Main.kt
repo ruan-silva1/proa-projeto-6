@@ -43,21 +43,13 @@ class User {
     val telefones = mutableListOf("(11) 9999-1111", "(22) 8888-2222", "(33) 7777-3333")
     val alturas = mutableListOf(1.75, 1.68, 1.80)
     val salarios = mutableListOf(2500.0, 3200.0, 4000.0)
-    val matriculas = mutableListOf("M001", "M002", "M003")
-    val nomesSorted = nomes.sorted()
-    val enderecosSorted = mutableListOf<String>()
-    val telefonesSorted = mutableListOf<String>()
-    val alturasSorted = mutableListOf<Double>()
-    val salariosSorted = mutableListOf<Double>()
-    val matriculasSorted = mutableListOf<String>()
-
-
+    val matriculas = mutableListOf("M002", "M001", "M003")
 
     val mediaAltura: Double
-        get(){
-            return if(alturas.isNotEmpty()){
+        get() {
+            return if (alturas.isNotEmpty()) {
                 alturas.sum() / alturas.size
-            }else{
+            } else {
                 0.0
             }
         }
@@ -68,32 +60,29 @@ class User {
             println("Digite o nome do usuário:")
             val nome = readln()
             nomes.add(nome)
-            println("Digite o numero da matricula:")
+            println("Digite o número da matrícula:")
             val matricula = readln()
             matriculas.add(matricula)
-            println("Digite o salario:")
+            println("Digite o salário:")
             val salario = readln().toDouble()
             salarios.add(salario)
-            nomes.add(nome)
             println("Digite o endereço do usuário:")
             val endereco = readln()
             enderecos.add(endereco)
             println("Digite o telefone do usuário:")
             val telefone = readln()
             telefones.add(telefone)
-            println("qual sua altura")
+            println("Qual a sua altura?")
             val altura = readln().toDouble()
             alturas.add(altura)
             i++
         }
-        println("media das alturas é ${this.mediaAltura}")
+        println("Média das alturas é ${this.mediaAltura}")
     }
-
-
 
     fun pesquisarUser() {
         var usuarioEncontrado = false
-        println("Qual nome ou matricula do usuário que deseja pesquisar?")
+        println("Qual nome ou matrícula do usuário que deseja pesquisar?")
         val search = readln()
         for (i in nomes.indices) {
             if (nomes[i] == search || matriculas[i] == search) {
@@ -103,7 +92,7 @@ class User {
                 val telefoneUser = telefones[i]
                 val alturaUser = alturas[i]
                 val salarioUser = salarios[i]
-                println("O usuário ${nomes[i]} mora em $enderecoUser possui o telefone $telefoneUser mede $alturaUser e ganha $salarioUser")
+                println("O usuário ${nomes[i]} mora em $enderecoUser, possui o telefone $telefoneUser, mede $alturaUser e ganha $salarioUser")
             }
         }
         if (!usuarioEncontrado) {
@@ -112,30 +101,71 @@ class User {
     }
 
     fun mostrarRegistros() {
-        println("escolha a ordem de registros")
-        println("0 - ordenar por ordem de entrada")
-        println("1 - ordenar por nome")
-        println("2 - ordenar por matricula")
-        println("3 - maior salario")
+        println("Escolha a ordem de registros:")
+        println("0 - Ordenar por ordem de entrada")
+        println("1 - Ordenar por nome")
+        println("2 - Ordenar por matrícula")
+        println("3 - Ordenar por maior salário")
         val escolhaRegistro = lerEntradaNumerica()
-        when(escolhaRegistro){
-            1-> this.ordernarRegistros(this.nomesSorted)
-            2-> this.ordernarRegistros(this.matriculasSorted)
-            //2-> this.ordernarRegistros(this.salariosSorted)
+
+        // Limpa as listas ordenadas antes de preenchê-las novamente
+        val nomesSorted = mutableListOf<String>()
+        val enderecosSorted = mutableListOf<String>()
+        val telefonesSorted = mutableListOf<String>()
+        val alturasSorted = mutableListOf<Double>()
+        val salariosSorted = mutableListOf<Double>()
+        val matriculasSorted = mutableListOf<String>()
+
+        when (escolhaRegistro) {
+            0 -> {
+                // Ordem de entrada (não ordena)
+                nomesSorted.addAll(nomes)
+                enderecosSorted.addAll(enderecos)
+                telefonesSorted.addAll(telefones)
+                alturasSorted.addAll(alturas)
+                salariosSorted.addAll(salarios)
+                matriculasSorted.addAll(matriculas)
+            }
+            1 -> {
+                // Ordenar por nome
+                val indicesOrdenados = nomes.withIndex().sortedBy { it.value }.map { it.index }
+                preencherListasOrdenadas(indicesOrdenados, nomesSorted, enderecosSorted, telefonesSorted, alturasSorted, salariosSorted, matriculasSorted)
+            }
+            2 -> {
+                // Ordenar por matrícula
+                val indicesOrdenados = matriculas.withIndex().sortedBy { it.value }.map { it.index }
+                preencherListasOrdenadas(indicesOrdenados, nomesSorted, enderecosSorted, telefonesSorted, alturasSorted, salariosSorted, matriculasSorted)
+            }
+            3 -> {
+                // Ordenar por maior salário
+                val indicesOrdenados = salarios.withIndex().sortedByDescending { it.value }.map { it.index }
+                preencherListasOrdenadas(indicesOrdenados, nomesSorted, enderecosSorted, telefonesSorted, alturasSorted, salariosSorted, matriculasSorted)
+            }
+            else -> {
+                println("Opção inválida! Exibindo registros na ordem de entrada.")
+                nomesSorted.addAll(nomes)
+                enderecosSorted.addAll(enderecos)
+                telefonesSorted.addAll(telefones)
+                alturasSorted.addAll(alturas)
+                salariosSorted.addAll(salarios)
+                matriculasSorted.addAll(matriculas)
+            }
         }
 
-        if (nomes.isEmpty()) {
+        // Exibe os registros
+        if (nomesSorted.isEmpty()) {
             println("Nenhum registro encontrado.")
             return
         }
+
         val colunaNome = 15
         val colunaMatricula = 10
         val colunaTelefone = 15
-        val colunaEndereco = 15
+        val colunaEndereco = 20
         val colunaAltura = 8
         val colunaSalario = 10
 
-       //head
+        // Cabeçalho
         println(
             "Nome".padEnd(colunaNome) + " | " +
                     "Matrícula".padEnd(colunaMatricula) + " | " +
@@ -145,27 +175,35 @@ class User {
                     "Salário".padEnd(colunaSalario)
         )
 
-        //table body
-        for (i in this.nomes.indices) {
+        // Corpo da tabela
+        for (i in nomesSorted.indices) {
             println(
-                        this.nomesSorted[i].padEnd(colunaNome) + " | " +
-                        this.matriculasSorted[i].padEnd(colunaMatricula) + " | " +
-                        this.telefonesSorted[i].padEnd(colunaTelefone) + " | " +
-                        this.enderecosSorted[i].toString().padEnd(colunaEndereco) + " | " +
-                        this.alturasSorted[i].toString().padEnd(colunaAltura) + " | " +
-                        this.salariosSorted[i].toString().padEnd(colunaSalario)
+                nomesSorted[i].padEnd(colunaNome) + " | " +
+                        matriculasSorted[i].padEnd(colunaMatricula) + " | " +
+                        telefonesSorted[i].padEnd(colunaTelefone) + " | " +
+                        enderecosSorted[i].padEnd(colunaEndereco) + " | " +
+                        alturasSorted[i].toString().padEnd(colunaAltura) + " | " +
+                        salariosSorted[i].toString().padEnd(colunaSalario)
             )
         }
     }
 
-    fun ordernarRegistros(arraySorted: List<Any?>){
-        for(e in arraySorted){
-            val numeroIndice = nomes.indexOf(e)
-             this.enderecosSorted.add(this.enderecos[numeroIndice])
-             this.telefonesSorted.add(this.telefones[numeroIndice])
-             this.alturasSorted.add(this.alturas[numeroIndice])
-             this.salariosSorted.add(this.salarios[numeroIndice])
-             this.matriculasSorted.add(this.matriculas[numeroIndice])
+    private fun preencherListasOrdenadas(
+        indicesOrdenados: List<Int>,
+        nomesSorted: MutableList<String>,
+        enderecosSorted: MutableList<String>,
+        telefonesSorted: MutableList<String>,
+        alturasSorted: MutableList<Double>,
+        salariosSorted: MutableList<Double>,
+        matriculasSorted: MutableList<String>
+    ) {
+        for (i in indicesOrdenados) {
+            nomesSorted.add(nomes[i])
+            enderecosSorted.add(enderecos[i])
+            telefonesSorted.add(telefones[i])
+            alturasSorted.add(alturas[i])
+            salariosSorted.add(salarios[i])
+            matriculasSorted.add(matriculas[i])
         }
     }
 }
