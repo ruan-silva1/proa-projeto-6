@@ -2,13 +2,36 @@ nomes[] //podem ser iguais
 enderecos[] //podem ser iguais
 telefones[] //nao podem ser iguais
 i=0
+
+iniciar menu
+mostre escolha uma opcao
+grava a opcao
+caso seja 
+1-> fazerRegistro
+2-> pesquisarUser
+3-> mostrarUser
+4-> sair
+
+fazerRegistro
 enquanto i for menor que 10
 	pede para o usuario o nome
+	grava o nome
 	adiciona nome ao nomes
+	pede para o usuario a matricula
+	grava a matricula
+	adiciona matricula a matriculas
 	pede para o usuario o endereço
+	grava o endereco
 	adiciona endereco ao enderecos
 	pede para o usuario o telefone
+	grava o telefone
 	adicione telefone aos telefones
+	pede para o usuario a altura 
+	salva a altura como double
+	adiciona altura as alturas
+	pede para o usuario o salario
+	adiciona salario aos salarios
+	grave o salario
 	i++
 	
 pesquisarUser
@@ -29,4 +52,26 @@ enquanto i<10
 	mostre nomes[i] telefone[i] endereco[i]
 i++
 
+mostrar User
+nomesSorted = []
+enderecosSorted = []
+telefonesSorted = []
+salariosSorted = []
+alturasSortes  = []
+mostre escolha como que ordenar os usuarios
+nome,matricula,salario
+caso seja
+1-> {	indicesNomesSorteado = pecorra k,v de nomes com base na ordenacao de palavras
+	ordernarLista()
+	}
+2->{
+	indiceMatriculaSorteado = matriculas.withIndex().sortedBy(it.value)
+}
 
+
+ordernarLista IndexOrdenado
+nomesSorted.add(nomes[IndexOrdenado])
+enderecosSorted.add(enderecos[IndexOrdenado])
+telefonesSorted.add(telefones[IndexOrdenado])
+salariosSorted = [salarios[IndexOrdenado]]
+alturasSortes  = [alturas[IndexOrdenado]]
